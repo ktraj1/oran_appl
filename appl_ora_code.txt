@@ -1,0 +1,30 @@
+object Main {
+	val PriceApple = BigDecimal("0.60")
+	val PriceOrange = BigDecimal("0.25")
+	val Apple = "apple"
+	val Orange = "orange"
+
+//case statement to get price for a product
+		def scan1(product: String): Option[BigDecimal] = product match {
+		case Apple => Some(PriceApple)
+		case Orange => Some(PriceOrange)
+		case _ => None
+										}
+//discount for products as sequence of string
+
+		def scan2_disc(products: Seq[String]): BigDecimal = {
+		discount(products, 2, Apple) + discount(products, 3, Orange)
+								}
+//no discount for products as sequence of string
+
+		def scan2_nodisc(products: Seq[String]): BigDecimal = {
+		discount(products, 1, Apple) + discount(products, 1, Orange)
+//calculation for products 									}
+		def discount(products: Seq[String], discountedQuantity: Int, discountedProduct: String):BigDecimal =
+		products.count(_ == discountedProduct)*1.0 / discountedQuantity* scan1(discountedProduct).get
+def main(args: Array[String]) {
+println("Total with discount £" + scan2_disc(List("apple", "apple", "orange", "orange","apple", "orange")))
+println("Total with discount £" + scan2_nodisc(List("apple", "apple", "orange", "orange","apple", "orange")))	
+}
+}
+scala> Main.main(Array())
